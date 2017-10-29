@@ -1,43 +1,123 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--ng-app directive to init angular app , alone = without def module = default scope-->
+<!--app is our DemoApp = defined module -->
+<html lang="en" ng-app="DemoApp">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--I. BOOTSTRAP LIBS-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--To ensure proper rendering and touch zooming-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
+    <!--https://www.w3schools.com/bootstrap/bootstrap_grid_basic.asp-->
+    <!--fixed width container (bootstrap) -->
+    <div class="container" >
+      <h1>My First Bootstrap Page</h1>
+      <p>This is some text.</p>
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+         <div class="row">
+             <div class="col-md-12 text-center">
+                 <hr>
+                 <!--https://stackoverflow.com/questions/9184141/how-do-you-get-centered-content-using-twitter-bootstrap-->
+               <h2>Subtitle</h2>
+                <p>This is some text.</p>
+                 <img src="https://www.w3schools.com/bootstrap/sanfran.jpg" class="img-responsive img-rounded center-block" alt="Cinque Terre" style="width:308px;height:auto;">
+             <hr>
+             </div>
+         </div>
 
-  <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+         <!--<div class="row">-->
+            <!--<div class="col-md-4">-->
+                <!--&lt;!&ndash;https://www.w3schools.com/bootstrap/bootstrap_images.asp&ndash;&gt;-->
+                <!--&lt;!&ndash;https://stackoverflow.com/questions/18462808/responsive-image-align-center-bootstrap-3/20396826#20396826&ndash;&gt;-->
+            <!--</div>-->
+         <!--</div>-->
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+        <div class="row">
+            <!--Partial views !-->
+            <div class="col-md-6">
+                <!--placeholder for them-->
+                <!--scope limited in this div !! -->
+                <div ng-view>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h2>List tests</h2>
+                <h3>Input lookout</h3>
+                <!--ng-model directive add a property in the view-model (in the scope, global), into the scope-->
+                <!--pipe between data binding and filter-->
+                <!--{{}} is Template Binding-->
+                Name : <input type="text" ng-model="filter.name"/>
+                <br>
+                Looking for : {{ filter.name | uppercase }}
+
+            <!--the view knows now manually about its controller , and scope auto shared inside this div-->
+            <!--DIGEST the controller a 2n time !-->
+            <!--https://stackoverflow.com/questions/15535336/combating-angularjs-executing-controller-twice-->
+            <div ng-controller="SimpleController">
+                <h3>Looping scoped dict</h3>
+                <ul>
+                    <li ng-repeat="member in members | filter:filter.name | orderBy:'city'">Name = {{member.name}} - {{member.city}}</li>
+                </ul>
+            </div>
+
+            <p>
+                <!-- scope reminder : http://plnkr.co/edit/zZfUQN?p=preview -->
+                <!--https://github.com/angular/angular.js/wiki/Understanding-Scopes-->
+                <i>Unscopped (locally): {{members[0].name}} </br> Globally scoped : {{filter.name}}</i>
+            </p>
+            <!--ng-init directive init data to be bound-->
+            <div ng-init="customers=[{name:'Ludo', city:'Wol'}, {name:'Loic', city:'Ucl'}, {name:'Lorenzo', city:'Ixl'}]">
+                <h3>Looping dict</h3>
+                <ul>
+                    <li ng-repeat="cust in customers | filter:filter.name | orderBy:'city'">Name = {{cust.name}} - {{cust.city}}</li>
+                </ul>
+            </div>
+
+            <!--ng-init directive init data to be bound-->
+            <div ng-init="pnames=['Ludo','Loic','Lorenzo']">
+                <h3>Looping list</h3>
+                <ul>
+                     <!--pipe on the bound variable itself, not on the ng-repeat-->
+                    <!--reverse order is true- https://docs.angularjs.org/api/ng/filter/orderBy-->
+                    <li ng-repeat="pname in pnames | orderBy:pname:true">{{pname | uppercase}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+            </div>
+
+    <!--I. ANGULAR (not defined ? should be above)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <!--https://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider-->
+    <!--https://stackoverflow.com/questions/19197182/error-injectorunpr-unknown-provider-routeprovider-->
+    <!--https://stackoverflow.com/questions/33061114/cant-find-angular-route-js-on-google-cdn-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <!-- ANGULAR APP -->
+    <!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.
+-->
+    <script src="app.module.js"></script>
+    <script src="app.service.js"></script>
+    <script src="app.config.js"></script>
+    <script src="app.controller.js"></script>
+
 </body>
 </html>

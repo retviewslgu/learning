@@ -39,60 +39,15 @@
  *
  */
 var root = 'https://jsonplaceholder.typicode.com';
-var demoApp = angular.module('DemoApp', ['ngRoute'])
-// function could be anonymous  : controller('SimpleController', function($scope){})
-    //  controller can take list of controller {}
-    .controller('SimpleController', ['$scope', 'simpleFactory', function SimpleController($scope, simpleFactory) {
-    // DO NOT FORGET twice dependencies ['simpleFactory',function (simpleFactory) + ORDER OF THEM ...
-
-        console.log('Entering controller');
-        // fake data from db
-        $scope.members=[
-                {name:'Ludo', city:'Wol'},
-                {name:'Loic', city:'Ucl'},
-                {name:'Lorenzo', city:'Ixl'}
-            ];
-
-        $scope.addMember=function(){
-            $scope.members.push({
-                name:$scope.newMember.name,
-                city:$scope.newMember.city
-            });
-        }
-
-        // simpleFactory auto injected
-        // update scope for the view
-        simpleFactory.getPosts().then(function (result) {
-            // Async handling
-            $scope.posts = result.data;
-            console.log("Remote posts loaded "+$scope.posts.length)
-        })
 
 
- }]);
 
-// config - SPA
-// controller entered twice as two views ? ...
-demoApp.config(function ($routeProvider) {
-    $routeProvider
-        .when('/',
-            {
-                controller: 'SimpleController',
-                templateUrl: 'partials/View1.html'
-            })
-        .when('/view2',
-            {
-                controller: 'SimpleController',
-                templateUrl: 'partials/View2.html'
-            })
-        .otherwise({redirectTo:'/'});
-});
 
 // https://toddmotto.com/factory-versus-service
 // https://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html
 // http://www.learn-angular.org/#!/lessons/the-factory-recipe (service)
 // https://www.airpair.com/javascript/posts/services-in-angularjs-simplified-with-examples
-demoApp.factory('simpleFactory', ['$http',function ($http) {
+angular.module('DemoApp').factory('simpleFactory', ['$http',function ($http) {
     // DO NOT FORGET twice dependencies ['$http',function ($http) ...
     var factory = {};
 
