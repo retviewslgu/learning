@@ -1,0 +1,28 @@
+<div>
+    <h3>View 1 - add a member</h3>
+
+    List in view scope from route :
+    <ul>
+       <li ng-repeat="member in members | filter:filter.name">Name = {{member.name}} - {{member.city}}</li>
+    </ul>
+
+    Member name:
+    <!--new property on the scope-->
+    <input type="text" ng-model="newMember.name">
+
+    <br/>
+
+    Member city:
+    <!--new property on the scope-->
+    <input type="text" ng-model="newMember.city">
+
+    <br/>
+    <br/>
+
+    <button class="btn btn-primary" ng-click="addMember()">Add</button>
+
+    <!--https://www.w3schools.com/bootstrap/bootstrap_buttons.asp-->
+    <!--https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_button_styles&stacked=h-->
+    <a href="#!/view2" class="btn btn-info">Next</a>
+    <!--http://localhost:63342/angular60/app/1stpage.html#!/view2-->
+</div>
