@@ -34,7 +34,9 @@ pdf
     * S3 : https://docs.angularjs.org/api/ng/service/$q
 - TODO : Prototypal inheritance
 - TODO : Advanced routing
+    * S1 : https://docs.angularjs.org/tutorial/step_09
 - TODO : material design
+- TODO : minify & packaging
 - TODO : Python back-end
 - TODO (low) : TESTING
 

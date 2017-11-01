@@ -22,9 +22,14 @@
       <!--Body content-->
 
       <ul class="phones">
-        <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+        <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp" class="thumbnail">
           <span>{{phone.name}}</span>
-          <p>{{phone.snippet}}</p>
+
+         <a href="#/phones/{{phone.id}}" class="thumb">
+          <img ng-src="{{baseUrl + phone.imageUrl}}" alt="{{phone.name}}" />
+         </a>
+
+                <p>{{phone.snippet}}</p>
         </li>
       </ul>
 

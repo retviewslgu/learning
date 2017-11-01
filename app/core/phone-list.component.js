@@ -4,8 +4,9 @@ angular.
   component('componentPhoneList', {
       // Note: The URL is relative to our `index.html` file
     templateUrl:'core/phone-list.template.html',
-    controller: function ComponentPhoneListController($http) {
-      var baseUrl = 'https://raw.githubusercontent.com/angular/angular-phonecat/1.4-snapshot/app/';
+        // $scope not defined : add it here in the ctrller dependcies
+    controller: function ComponentPhoneListController($scope,$http) {
+      $scope.baseUrl = 'https://raw.githubusercontent.com/angular/angular-phonecat/1.4-snapshot/app/';
       var self = this;
 
 
@@ -29,7 +30,7 @@ angular.
         self.orderProp = 'age'; // initial
 
             // https://docs.angularjs.org/api/ng/service/$http
-      $http.get(baseUrl+'phones/phones.json').then(
+      $http.get($scope.baseUrl+'phones/phones.json').then(
           function successCallback(response) {
             self.phones = response.data;
           },
