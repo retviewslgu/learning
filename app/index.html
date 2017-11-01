@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<!--ng-app directive to init angular app , alone = without def module = default scope-->
+<!--ng-app directive to init angular app , alone = without def module = default ROOT scope-->
 <!--app is our DemoApp = defined module -->
-<html lang="en" ng-app="DemoApp">
+<!-- ng-cloak
+ * The `ngCloak` directive is used to prevent the Angular html template from being briefly
+ * displayed by the browser in its raw (uncompiled) form while your application is loading. Use this
+ * directive to avoid the undesirable flicker effect caused by the html template display.
+-->
+<html lang="en" ng-cloak ng-app="DemoApp">
 
 <!--https://www.w3schools.com/html/html_head.asp-->
 <head>
@@ -14,6 +19,13 @@
         <!--I. BOOTSTRAP LIBS-->
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!--APP styling -->
+        <link rel="stylesheet" href="style/app.css" />
+
+        <!--Font awesome-->
+        <!--https://www.w3schools.com/icons/fontawesome_icons_intro.asp-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -52,14 +64,22 @@
         </div>
 
         <!-- OFFICIAL TUTORIAL-->
+        <!--ctrller attached to this tag, and handles DOM sub-tree from here-->
+        <!-- scope inherit the root scope from app -->
         <div class="row" data-ng-controller="PhoneListController">
                 <ul>
+                        <!--repeater scopeS, inherit from PhoneListController scope-->
                         <li ng-repeat="phone in phones">
+                                <!--2ways data binding (model/view)-->
                                 <span>{{phone.name}}</span>
                                 <p>{{phone.snippet}}</p>
                         </li>
                 </ul>
         </div>
+
+        <!--Component with isolated scope (doesn't inherit from rootScope)-->
+        <!--no property-name conflict here -->
+        <component-phone-list></component-phone-list>
         <!-- OFFICIAL TUTORIAL-->
 
         <hr>
@@ -140,8 +160,17 @@
 <script src="app.route.js"></script>
 <script src="app.controller.js"></script>
 
-<!-- /core -->
-<script src="core/phoneCatAppCtrl.js"></script>
+<!-- /core : phonelist -->
+<script src="core/phone-cat-app.controller.js"></script>
+<!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.-->
+<script src="core/phone-list.module.js"></script>
+<script src="core/phone-list.component.js"></script>
+
+<!--/core : app.core-->
+<script src="core/app.core.module.js"></script>
+<script src="core/app.core.controller.js"></script>
+<script src="core/app.core.services.js"></script>
+
 
 </body>
 </html>

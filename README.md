@@ -9,6 +9,8 @@
 2. ``` npm install ```
     * ```sudo npm install -g bower```
 3. ``` bower install ```
+4. GIT :
+https://github.com/retviewslgu/learning
 
 
 
@@ -27,9 +29,14 @@ pdf
 - Source 3 : https://www.w3schools.com/angular/default.asp
 - TODO : Services https://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html
 - TODO : Promises
+    * S1 : http://haroldrv.com/2015/02/understanding-angularjs-q-service-and-promises/
+    * S2 (advanced JS) : https://toddmotto.com/promises-angular-q
+    * S3 : https://docs.angularjs.org/api/ng/service/$q
 - TODO : Prototypal inheritance
+- TODO : Advanced routing
 - TODO : material design
-
+- TODO : Python back-end
+- TODO (low) : TESTING
 
 
 
@@ -37,5 +44,3 @@ OTHER
 - style guide : https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
 
 
-GIT :
-https://github.com/retviewslgu/learning
