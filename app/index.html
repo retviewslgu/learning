@@ -95,7 +95,8 @@
                 <!--Partial views !-->
                 <div class="col-md-6">
                         <!--placeholder for them-->
-                        <!--scope limited in this div !! -->
+                        <!--new scope , limited in this div !! -->
+                        <!--inherit rootscope-->
                         <div ng-view>
 
                         </div>
@@ -153,6 +154,10 @@
 
 <!--I. ANGULAR (not defined ? should be above)-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<!--IF FROM RAW GITHUB : https://stackoverflow.com/questions/12090883/using-type-text-plain-for-javascript-->
+<!--https://raw.githubusercontent.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-1.3.3.min.js-->
+<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
 
 <!--https://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider-->
 <!--https://stackoverflow.com/questions/19197182/error-injectorunpr-unknown-provider-routeprovider-->
@@ -176,6 +181,11 @@
 <script src="core/app.core.module.js"></script>
 <script src="core/app.core.controller.js"></script>
 <script src="core/app.core.services.js"></script>
+
+<!--/phone detail-->
+<script src="phone-detail/phone-detail.module.js"></script>
+<script src="phone-detail/phone-detail.component.js"></script>
+
 
 
 </body>

@@ -38,6 +38,8 @@ pdf
 - TODO : material design
 - TODO : minify & packaging
 - TODO : Python back-end
+- TODO : Bootstrap
+    * https://getbootstrap.com/docs/3.3/css/
 - TODO (low) : TESTING
 
 

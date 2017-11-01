@@ -1,11 +1,13 @@
 // Register `phoneList` component, along with its associated controller and template
+// component +- = light directive
 angular.
   module('phoneListModule').
   component('componentPhoneList', {
       // Note: The URL is relative to our `index.html` file
     templateUrl:'phone-list/phone-list.template.html',
         // $scope not defined : add it here in the ctrller dependcies
-    controller: function ComponentPhoneListController($scope,$http) {
+        // inline injection with names to be sure minify will work correctly !
+    controller: ['$scope','$http', function ComponentPhoneListController($scope, $http) {
       $scope.baseUrl = 'https://raw.githubusercontent.com/angular/angular-phonecat/1.4-snapshot/app/';
       var self = this;
 
@@ -37,5 +39,5 @@ angular.
           function errorCallback(response) {
         });
 
-    }
+    }]
   });

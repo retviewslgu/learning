@@ -22,11 +22,15 @@
                 <!--Body content-->
 
                 <ul class="phones">
+                        <!--https://www.w3schools.com/bootstrap/bootstrap_images.asp-->
                         <li ng-repeat="phone in $ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp"
                             class="thumbnail">
-                                <span>{{phone.name}}</span>
+                                <span><b>{{phone.name}}</b></span>
 
-                                <a href="#/phones/{{phone.id}}" class="thumb">
+                                <!-- #! is required ?? maybe because phone_detail is not the default root -->
+                                <a href="#!/phone_detail/{{phone.id}}" class="thumb">
+                                        <!--That directive prevents the browser from treating the AngularJS {{ expression }} markup literally,
+                                        and initiating a request to an invalid URL -->
                                         <img ng-src="{{baseUrl + phone.imageUrl}}" alt="{{phone.name}}"/>
                                 </a>
 
