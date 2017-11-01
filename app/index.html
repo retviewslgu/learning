@@ -45,21 +45,23 @@
 <!--https://www.w3schools.com/bootstrap/bootstrap_grid_basic.asp-->
 <!--fixed width container (bootstrap) -->
 <div class="container">
-        <h1>My First Bootstrap Page</h1>
-        <p>This is some text.</p>
+        <h1>A complete bootstrap page</h1>
+        <p class="lead"><i>The goal is to learn and package a few front-end techs together.</i></p>
 
         <div class="row">
                 <div class="col-md-12 text-center">
                         <hr>
                         <!--https://stackoverflow.com/questions/9184141/how-do-you-get-centered-content-using-twitter-bootstrap-->
-                        <h2>Official tutorial</h2>
-                        <p>This is some text.</p>
                         <!--https://www.w3schools.com/bootstrap/bootstrap_images.asp-->
                         <!--https://stackoverflow.com/questions/18462808/responsive-image-align-center-bootstrap-3/20396826#20396826-->
 
-                        <img src="https://www.w3schools.com/bootstrap/sanfran.jpg"
+                        <!--<img src="https://www.w3schools.com/bootstrap/sanfran.jpg"-->
+                             <!--class="img-responsive img-rounded center-block" alt="Cinque Terre"-->
+                             <!--style="width:208px;height:auto;">-->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/1000px-AngularJS_logo.svg.png"
                              class="img-responsive img-rounded center-block" alt="Cinque Terre"
-                             style="width:208px;height:auto;">
+                             style="width:400px;height:auto;">
+                        <p>A little image placement</p>
 
                         <hr>
 
@@ -69,16 +71,17 @@
         <!-- OFFICIAL TUTORIAL-->
         <!--ctrller attached to this tag, and handles DOM sub-tree from here-->
         <!-- scope inherit the root scope from app -->
-        <div class="row" data-ng-controller="PhoneListController">
-                <ul>
-                        <!--repeater scopeS, inherit from PhoneListController scope-->
-                        <li ng-repeat="phone in phones">
-                                <!--2ways data binding (model/view)-->
-                                <span>{{phone.name}}</span>
-                                <p>{{phone.snippet}}</p>
-                        </li>
-                </ul>
-        </div>
+        <h2>Official AngularJS tutorial</h2>
+        <!--<div class="row" data-ng-controller="PhoneListController">-->
+                <!--<ul>-->
+                        <!--&lt;!&ndash;repeater scopeS, inherit from PhoneListController scope&ndash;&gt;-->
+                        <!--<li ng-repeat="phone in phones">-->
+                                <!--&lt;!&ndash;2ways data binding (model/view)&ndash;&gt;-->
+                                <!--<span>{{phone.name}}</span>-->
+                                <!--<p>{{phone.snippet}}</p>-->
+                        <!--</li>-->
+                <!--</ul>-->
+        <!--</div>-->
 
         <!--Component with isolated scope (doesn't inherit from rootScope)-->
         <!--no property-name conflict here -->
@@ -166,8 +169,8 @@
 <!-- /core : phonelist -->
 <script src="core/phone-cat-app.controller.js"></script>
 <!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.-->
-<script src="core/phone-list.module.js"></script>
-<script src="core/phone-list.component.js"></script>
+<script src="phone-list/phone-list.module.js"></script>
+<script src="phone-list/phone-list.component.js"></script>
 
 <!--/core : app.core-->
 <script src="core/app.core.module.js"></script>

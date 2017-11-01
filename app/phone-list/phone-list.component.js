@@ -3,7 +3,7 @@ angular.
   module('phoneListModule').
   component('componentPhoneList', {
       // Note: The URL is relative to our `index.html` file
-    templateUrl:'core/phone-list.template.html',
+    templateUrl:'phone-list/phone-list.template.html',
         // $scope not defined : add it here in the ctrller dependcies
     controller: function ComponentPhoneListController($scope,$http) {
       $scope.baseUrl = 'https://raw.githubusercontent.com/angular/angular-phonecat/1.4-snapshot/app/';
