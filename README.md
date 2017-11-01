@@ -33,6 +33,7 @@ pdf
     * S2 (advanced JS) : https://toddmotto.com/promises-angular-q
     * S3 : https://docs.angularjs.org/api/ng/service/$q
 - TODO : Prototypal inheritance
+    * Source 1 + $ctrl.phone
 - TODO : Advanced routing
     * S1 : https://docs.angularjs.org/tutorial/step_09
 - TODO : material design
