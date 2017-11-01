@@ -1,3 +1,22 @@
+# Tutorial to learn angularJS
+
+> Learn it the good way :+1:
+
+## Installation
+1. ``` node --version ```
+    * Run node web server : ```npm start```
+    * http://localhost:8000/
+2. ``` npm install ```
+    * ```sudo npm install -g bower```
+3. ``` bower install ```
+
+
+
+
+Markdown cheat sheets :
+- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+- https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf
+
 BOOTSTRAP :
 https://www.w3schools.com/bootstrap/bootstrap_get_started.asp
 
