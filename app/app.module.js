@@ -6,5 +6,6 @@ angular.module('DemoApp', [
         'phoneListModule',
         'app.core',
         'phoneDetail',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'proto-inheritance' // EASY to FORGET dependency !!
 ])

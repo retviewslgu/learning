@@ -47,7 +47,8 @@ var root = 'https://jsonplaceholder.typicode.com';
 // https://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html
 // http://www.learn-angular.org/#!/lessons/the-factory-recipe (service)
 // https://www.airpair.com/javascript/posts/services-in-angularjs-simplified-with-examples
-angular.module('DemoApp').factory('simpleFactory', ['$http',function ($http) {
+angular.module('DemoApp')
+    .factory('simpleFactory', ['$http',function ($http) {
     // DO NOT FORGET twice dependencies ['$http',function ($http) ...
     var factory = {};
 
@@ -63,7 +64,7 @@ angular.module('DemoApp').factory('simpleFactory', ['$http',function ($http) {
             return posts;
     }
     return factory;
-}]);
+}])
 
 /*
 Service like snippet :

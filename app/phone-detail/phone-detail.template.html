@@ -11,26 +11,39 @@ ALT :
 - https://stackoverflow.com/questions/10233550/launch-bootstrap-modal-on-page-load
 - https://stackoverflow.com/questions/16265844/invoking-modal-window-in-angularjs-bootstrap-ui-using-javascript
 
+BUG : is flickering, ng-cloak is not working
+SOL 1 : KO = http://briantree.se/quick-tip-15-fix-ng-cloak-flicker-angularjs/
+SOL 2 : KO = http://blogs.infinitesquare.com/posts/web/pourquoi-il-ne-faut-pas-utiliser-ngcloak
+SOL 3 : lib for modal
+data-deferred-cloak
+=> $ctrl not resolved after rendering ???
+=> $http loading ! ? Race condition and img is loaded first ! Lazy concat !
+YESSSSSSSSSSSSSS  : ng-show="showModalState && !$ctrl.dataLoading"
 -->
-<div ng-show="myState" style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div ng-show="showModalState && !$ctrl.dataLoading" style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <a type="button" class="close" data-dismiss="modal" href="#!/" ng-click="myState=!myState" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <a type="button" class="close" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
       </div>
       <div class="modal-body">
 
               <!--The template -->
-                <img ng-src="{{baseUrl +$ctrl.phone.images[0]}}" class="phone" />
+                <!--<img ng-src="{{baseUrl +$ctrl.phone.images[0]}}" class="center-block" />-->
+                <!--Flickers (404 on partial url baseUrl) with a str concat (+) ($scope.baseUrl or $ctrl.myBaseUrl) + $ctrl.mainImageUrl -->
+                <img ng-src="{{$ctrl.mainImageUrl}}" class="center-block" />
+
 
                 <h1>{{$ctrl.phone.name}}</h1>
 
                 <p>{{$ctrl.phone.description}}</p>
 
+
                 <ul class="phone-thumbs">
                   <li ng-repeat="img in $ctrl.phone.images">
-                    <img ng-src="{{baseUrl +img}}" />
+                          <!--No flickering (404 on partial url) here ?? -->
+                    <img ng-src="{{baseUrl +img}}"  ng-click="$ctrl.setImage(img)" />
                   </li>
                 </ul>
 
@@ -50,7 +63,7 @@ ALT :
                 </ul>
       </div>
       <div class="modal-footer">
-        <a type="button" class="btn btn-default" data-dismiss="modal" href="#!/" ng-click="myState=!myState">Back</a>
+        <a type="button" class="btn btn-default" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState">Back</a>
       </div>
     </div>
   </div>

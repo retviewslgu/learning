@@ -5,6 +5,23 @@ body {
 }
 
 
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+  KO
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/**
+KO
+ */
+[deferred-cloak], [data-deferred-cloak], [x-deferred-cloak], .deferred-cloak {
+    display: none ;
+}
+
 /* FROM angular official tuto - no bootstrap */
 .phones {
   list-style: none;
@@ -86,4 +103,43 @@ body {
 .modal-body{
     height: 500px;
     overflow-y: auto;
+}
+
+
+/* https://github.com/angular/angular.js/wiki/Understanding-Scopes */
+
+.example {
+  border: thin solid red;
+  padding: 10px;
+}
+
+.mainImg {
+  width: 160px;
+  height: 195px;
+  border: thin solid black;
+  float: right;
+  margin: 0px 0px 10px 5px;
+}
+
+.thumbsProto {
+  clear: both;
+  overflow: auto;
+  border: thin solid silver;
+  padding: 5px 10px;
+}
+
+.thumbDivProto {
+  border: thin solid green;
+  padding: 5px;
+  margin: 10px 0px;
+  overflow: auto;
+}
+
+.thumbProto {
+  width: 80px;
+  height: 87px;
+  border: thin solid black;
+  cursor: pointer;
+  float: left;
+  margin-right: 5px;
 }

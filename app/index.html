@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!--APP styling -->
-        <link rel="stylesheet" href="style/app.css" />
+        <link rel="stylesheet" href="style/demoapp.css" />
 
         <!--Font awesome-->
         <!--https://www.w3schools.com/icons/fontawesome_icons_intro.asp-->
@@ -83,9 +83,12 @@
                 <!--</ul>-->
         <!--</div>-->
 
-        <!--Component with isolated scope (doesn't inherit from rootScope)-->
+        <!--Component with COMPONENT isolated scope (doesn't inherit from rootScope)-->
         <!--no property-name conflict here -->
+        <!-- + child scopes (ctrller, etc.)-->
+
         <component-phone-list></component-phone-list>
+
         <!-- OFFICIAL TUTORIAL-->
 
         <hr>
@@ -170,12 +173,16 @@
 <script src="app.service.js"></script>
 <script src="app.route.js"></script>
 <script src="app.controller.js"></script>
+<script src="app.directive.js"></script>
+
 
 <!-- /core : phonelist -->
 <script src="core/phone-cat-app.controller.js"></script>
 <!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.-->
 <script src="phone-list/phone-list.module.js"></script>
 <script src="phone-list/phone-list.component.js"></script>
+<script src="phone-list/phone-list.service.js"></script>
+
 
 <!--/core : app.core-->
 <script src="core/app.core.module.js"></script>
@@ -185,6 +192,13 @@
 <!--/phone detail-->
 <script src="phone-detail/phone-detail.module.js"></script>
 <script src="phone-detail/phone-detail.component.js"></script>
+<script src="phone-detail/phone-detail.directive.js"></script>
+<script src="phone-detail/phone-detail.service.js"></script>
+
+
+<!--/proto inheritance-->
+<script src="proto-inheritance/proto-inheritance.module.js"></script>
+<script src="proto-inheritance/proto-inheritance.controller.js"></script>
 
 
 
