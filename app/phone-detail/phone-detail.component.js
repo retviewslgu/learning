@@ -12,8 +12,9 @@ angular.
         self.phoneId = $routeParams.phoneId;
         $scope.baseUrl = 'https://raw.githubusercontent.com/angular/angular-phonecat/1.4-snapshot/app/';
         self.myBaseUrl = $scope.baseUrl;
-        $scope.showModalState = true;
-        $scope.modalTitle = this.phoneId.replace(/-/g,' ').toUpperCase();
+
+        // $scope.showModalState = true;
+        // $scope.modalTitle = this.phoneId.replace(/-/g,' ').toUpperCase();
 
         /* functions */
         self.setImage = function setImage(imageUrl) {

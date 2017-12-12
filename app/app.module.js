@@ -7,5 +7,6 @@ angular.module('DemoApp', [
         'app.core',
         'phoneDetail',
         'ui.bootstrap',
-        'proto-inheritance' // EASY to FORGET dependency !!
+        'proto-inheritance', // EASY to FORGET dependency !!
+        'ngMaterial' // break some demoapp.css
 ])

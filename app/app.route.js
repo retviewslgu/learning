@@ -16,7 +16,7 @@ angular.module('DemoApp').config(['$locationProvider', '$routeProvider',
                         .when('/',
                             {
                                 controller: 'SimpleController',
-                                templateUrl: 'partials/View1.html'
+                                templateUrl: 'partials/home.html'
                             })
                         .when('/view1',
                             {
@@ -28,9 +28,18 @@ angular.module('DemoApp').config(['$locationProvider', '$routeProvider',
                                 controller: 'SimpleController',
                                 templateUrl: 'partials/View2.html'
                             })
+                        .when('/official',
+                            {
+                                templateUrl: 'partials/official.html'
+                            })
                         .when('/git',{
                                 controller: 'promiseController',
                                 templateUrl: 'partials/GitView.html'
+                            }
+                        )
+                        .when('/material',{
+                                // controller: 'Controller',
+                                templateUrl: 'material/material.html'
                             }
                         )
                         // Can associate component too !

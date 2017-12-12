@@ -23,8 +23,11 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-        <!--APP styling -->
-        <link rel="stylesheet" href="style/demoapp.css" />
+
+
+
+          <!-- Angular Material style sheet - BREAKS the demoapp.css -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
         <!--Font awesome-->
         <!--https://www.w3schools.com/icons/fontawesome_icons_intro.asp-->
@@ -36,12 +39,15 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+          <!--APP styling -->
+        <link rel="stylesheet" href="style/demoapp.css" />
+
         <!--To ensure proper rendering and touch zooming-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 </head>
-<body>
+<body class="bodyapp">
 <!--https://www.w3schools.com/bootstrap/bootstrap_grid_basic.asp-->
 <!--fixed width container (bootstrap) -->
 <div class="container">
@@ -68,95 +74,26 @@
                 </div>
         </div>
 
-        <!-- OFFICIAL TUTORIAL-->
-        <!--ctrller attached to this tag, and handles DOM sub-tree from here-->
-        <!-- scope inherit the root scope from app -->
-        <h2>Official AngularJS tutorial</h2>
-        <!--<div class="row" data-ng-controller="PhoneListController">-->
-                <!--<ul>-->
-                        <!--&lt;!&ndash;repeater scopeS, inherit from PhoneListController scope&ndash;&gt;-->
-                        <!--<li ng-repeat="phone in phones">-->
-                                <!--&lt;!&ndash;2ways data binding (model/view)&ndash;&gt;-->
-                                <!--<span>{{phone.name}}</span>-->
-                                <!--<p>{{phone.snippet}}</p>-->
-                        <!--</li>-->
-                <!--</ul>-->
-        <!--</div>-->
-
-        <!--Component with COMPONENT isolated scope (doesn't inherit from rootScope)-->
-        <!--no property-name conflict here -->
-        <!-- + child scopes (ctrller, etc.)-->
-
-        <component-phone-list></component-phone-list>
-
-        <!-- OFFICIAL TUTORIAL-->
-
-        <hr>
 
 
-        <div class="row">
-                <!--Partial views !-->
-                <div class="col-md-6">
-                        <!--placeholder for them-->
-                        <!--new scope , limited in this div !! -->
-                        <!--inherit rootscope-->
-                        <div ng-view>
 
-                        </div>
-                </div>
+        <!--Partial views !-->
+        <!--placeholder for them-->
+        <!--new scope , limited in this div !! -->
+        <!--inherit rootscope-->
+        <div ng-view>
 
-                <div class="col-md-6">
-                        <h2>3. List tests</h2>
-                        <h3>Input lookout</h3>
-                        <!--ng-model directive add a property in the view-model (in the scope, global), into the scope-->
-                        <!--pipe between data binding and filter-->
-                        <!--{{}} is Template Binding-->
-                        Name : <input type="text" ng-model="filter.name"/>
-                        <br>
-                        Looking for : {{ filter.name | uppercase }}
-
-                        <!--the view knows now manually about its controller , and scope auto shared inside this div-->
-                        <!--DIGEST the controller a 2n time !-->
-                        <!--https://stackoverflow.com/questions/15535336/combating-angularjs-executing-controller-twice-->
-                        <div ng-controller="SimpleController">
-                                <h3>Looping scoped dict</h3>
-                                <ul>
-                                        <li ng-repeat="member in members | filter:filter.name | orderBy:'city'">Name =
-                                                {{member.name}} - {{member.city}}
-                                        </li>
-                                </ul>
-                        </div>
-
-                        <p>
-                                <!-- scope reminder : http://plnkr.co/edit/zZfUQN?p=preview -->
-                                <!--https://github.com/angular/angular.js/wiki/Understanding-Scopes-->
-                                <i>Unscopped (locally): {{members[0].name}} </br> Globally scoped : {{filter.name}}</i>
-                        </p>
-                        <!--ng-init directive init data to be bound-->
-                        <div ng-init="customers=[{name:'Ludo', city:'Wol'}, {name:'Loic', city:'Ucl'}, {name:'Lorenzo', city:'Ixl'}]">
-                                <h3>Looping dict</h3>
-                                <ul>
-                                        <li ng-repeat="cust in customers | filter:filter.name | orderBy:'city'">Name =
-                                                {{cust.name}} - {{cust.city}}
-                                        </li>
-                                </ul>
-                        </div>
-
-                        <!--ng-init directive init data to be bound-->
-                        <div ng-init="pnames=['Ludo','Loic','Lorenzo']">
-                                <h3>Looping list</h3>
-                                <ul>
-                                        <!--pipe on the bound variable itself, not on the ng-repeat-->
-                                        <!--reverse order is true- https://docs.angularjs.org/api/ng/filter/orderBy-->
-                                        <li ng-repeat="pname in pnames | orderBy:pname:true">{{pname | uppercase}}</li>
-                                </ul>
-                        </div>
-                </div>
         </div>
 </div>
 
 <!--I. ANGULAR (not defined ? should be above)-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<!--angular depencies for angular material-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+
 <!--IF FROM RAW GITHUB : https://stackoverflow.com/questions/12090883/using-type-text-plain-for-javascript-->
 <!--https://raw.githubusercontent.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-1.3.3.min.js-->
 <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
@@ -166,6 +103,11 @@
 <!--https://stackoverflow.com/questions/19197182/error-injectorunpr-unknown-provider-routeprovider-->
 <!--https://stackoverflow.com/questions/33061114/cant-find-angular-route-js-on-google-cdn-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
 
 <!-- ANGULAR APP -->
 <!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.-->

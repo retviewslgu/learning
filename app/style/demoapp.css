@@ -1,7 +1,8 @@
-body {
+.bodyapp {
         /*https://www.w3schools.com/css/default.asp*/
-        padding-top: 20px;
+        /*padding-top: 20px;*/
         background-color: #e6fdff;
+        height: initial;  /* fix angular material height 100% conflict */
 }
 
 

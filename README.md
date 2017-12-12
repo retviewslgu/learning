@@ -60,6 +60,7 @@ pdf
 - TODO : $rootScope, root.scope & global var (sharing data)
 - TODO : Advanced routing
     * S1 : https://docs.angularjs.org/tutorial/step_09
+    * S2 : https://github.com/angular-ui/ui-router/wiki/Nested-States-&-Nested-Views
 - TODO : Directive (custom)
 - TODO : Advanced provider
 - TODO : watch ($rootScope)
@@ -75,7 +76,7 @@ pdf
     * https://devdactic.com/improving-rest-with-ngresource/
     * https://docs.angularjs.org/tutorial/step_13
 - TODO (low) : TESTING
-- TODO
+- TODO : https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
 
 

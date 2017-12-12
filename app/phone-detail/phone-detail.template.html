@@ -20,15 +20,18 @@ data-deferred-cloak
 => $http loading ! ? Race condition and img is loaded first ! Lazy concat !
 YESSSSSSSSSSSSSS  : ng-show="showModalState && !$ctrl.dataLoading"
 -->
-<div ng-show="showModalState && !$ctrl.dataLoading" style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <a type="button" class="close" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
-      </div>
-      <div class="modal-body">
 
+
+<!--<div ng-show="showModalState && !$ctrl.dataLoading" style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+      <!--<div class="modal-header">-->
+        <!--<a type="button" class="close" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState" aria-label="Close"><span aria-hidden="true">&times;</span></a>-->
+        <!--<h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>-->
+      <!--</div>-->
+      <!--<div class="modal-body">-->
+
+  <div ng-show="!$ctrl.dataLoading">
               <!--The template -->
                 <!--<img ng-src="{{baseUrl +$ctrl.phone.images[0]}}" class="center-block" />-->
                 <!--Flickers (404 on partial url baseUrl) with a str concat (+) ($scope.baseUrl or $ctrl.myBaseUrl) + $ctrl.mainImageUrl -->
@@ -61,13 +64,19 @@ YESSSSSSSSSSSSSS  : ng-show="showModalState && !$ctrl.dataLoading"
                     <dd>{{$ctrl.phone.additionalFeatures}}</dd>
                   </li>
                 </ul>
-      </div>
-      <div class="modal-footer">
-        <a type="button" class="btn btn-default" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState">Back</a>
-      </div>
     </div>
-  </div>
-</div>
+      <!--</div>-->
+      <!--<div class="modal-footer">-->
+        <!--<a type="button" class="btn btn-default" data-dismiss="modal" href="#!/" ng-click="showModalState=!showModalState">Back</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+
+
 <!--<script type="text/javascript">-->
     <!--$(window).on('load',function(){-->
         <!--$('#myModal').modal('show');-->

@@ -1,10 +1,12 @@
-<div>
+<div class="row">
+<div class="col-md-6">
+        <div>
     <h2>1. View 1 - add a member</h2>
     <a href="#!/view2" class="btn btn-info">Next</a>
     <a href="#!/git" class="btn btn-info">Git</a>
     <a href="#!/proto" class="btn btn-info">Proto (NEW)</a>
 
-
+                https://stackoverflow.com/questions/8814472/how-to-make-an-html-back-link
     <br>
     List in view scope from route :
     <ul>
@@ -29,4 +31,55 @@
     <!--https://www.w3schools.com/bootstrap/bootstrap_buttons.asp-->
     <!--https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_button_styles&stacked=h-->
     <!--http://localhost:63342/angular60/app/1stpage.html#!/view2-->
+                </div>
+</div>
+
+<div class="col-md-6">
+    <h2>3. List tests</h2>
+    <h3>Input lookout</h3>
+    <!--ng-model directive add a property in the view-model (in the scope, global), into the scope (here SimpleCtrl)-->
+    <!--pipe between data binding and filter-->
+    <!--{{}} is Template Binding-->
+    Name : <input type="text" ng-model="filter.name"/>
+    <br>
+    Looking for : {{ filter.name | uppercase }}
+
+    <!--the view knows now manually about its controller , and scope auto shared inside this div-->
+    <!--DIGEST the controller a 2n time !-->
+    <!--https://stackoverflow.com/questions/15535336/combating-angularjs-executing-controller-twice-->
+    <!--ng-controller="SimpleController" not needed anymore-->
+        <div >
+            <h3>Looping scoped dict</h3>
+            <ul>
+                    <li ng-repeat="member in members | filter:filter.name | orderBy:'city'">Name =
+                            {{member.name}} - {{member.city}}
+                    </li>
+            </ul>
+        </div>
+
+    <p>
+            <!-- scope reminder : http://plnkr.co/edit/zZfUQN?p=preview -->
+            <!--https://github.com/angular/angular.js/wiki/Understanding-Scopes-->
+            <i>Unscopped (locally): {{members[0].name}} </br> Globally scoped : {{filter.name}}</i>
+    </p>
+    <!--ng-init directive init data to be bound-->
+    <div ng-init="customers=[{name:'Ludo', city:'Wol'}, {name:'Loic', city:'Ucl'}, {name:'Lorenzo', city:'Ixl'}]">
+            <h3>Looping dict</h3>
+            <ul>
+                    <li ng-repeat="cust in customers | filter:filter.name | orderBy:'city'">Name =
+                            {{cust.name}} - {{cust.city}}
+                    </li>
+            </ul>
+    </div>
+
+    <!--ng-init directive init data to be bound-->
+    <div ng-init="pnames=['Ludo','Loic','Lorenzo']">
+            <h3>Looping list</h3>
+            <ul>
+                    <!--pipe on the bound variable itself, not on the ng-repeat-->
+                    <!--reverse order is true- https://docs.angularjs.org/api/ng/filter/orderBy-->
+                    <li ng-repeat="pname in pnames | orderBy:pname:true">{{pname | uppercase}}</li>
+            </ul>
+    </div>
+</div>
 </div>
