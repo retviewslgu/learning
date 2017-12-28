@@ -9,6 +9,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine.url import URL
 import time
 from datetime import date, datetime
+import json
+from sqlalchemy.ext.declarative import DeclarativeMeta
 
 
 # http://initd.org/psycopg/docs/usage.html
@@ -73,20 +75,41 @@ class PollDao:
                 return results
 
         # I. Polls
-        def create_poll(self, admin_id):
+        def create_team(self, name, club):
                 db_session = self.session()
-                poll = Poll(admin_id=admin_id, creation_date=datetime.now())
+                team = Team(name=name, club=club)
+                db_session.add(team)
+                db_session.commit()
+                return team
+
+        def create_user(self, name, team):
+                db_session = self.session()
+                user = User(name=name,team_id=team.id)
+                db_session.add(user)
+                db_session.commit()
+                return user
+
+        # I. Polls
+        def create_poll(self, admin):
+                db_session = self.session()
+                poll = Poll(admin_id=admin.id, creation_date=datetime.now())
                 db_session.add(poll)
                 db_session.commit()
 
         def close_poll(self, id_poll):
+                db_session = self.session()
+                db_session.commit()
                 pass
 
         def archive_poll(self, id_poll):
                 pass
 
-        def find_last_poll(self, opened, closed, archived):
-                pass
+        def find_last_poll(self, closed, archived):
+                db_session = self.session()
+                # | Poll.closed ==  int(closed == True)
+                row = db_session.query(Poll).filter((Poll.archived == int(archived == True)), (Poll.closed ==  int(closed == True))).first()
+                print row.id
+                return row
 
         def find_all_polls(self):
                 pass
@@ -103,7 +126,8 @@ class PollDao:
 
         # III. Users.
         def find_all_users(self):
-                pass
+                db_session = self.session()
+                return db_session.query(User).all()
 
         def do_init(self):
                 host_name = '127.0.0.1'  # ''ec2-23-21-197-231.compute-1.amazonaws.com'
@@ -137,14 +161,45 @@ class PollDao:
                           'port': 5432,
                           'database': 'polarbee'
                           }
-                engine = create_engine(URL(**db_url))
+                self.engine = create_engine(URL(**db_url))
                 self.session = sessionmaker()
-                self.session.configure(bind=engine)
+                self.session.configure(bind=self.engine)
+                # self.engine.connect().execute() # SQL
                 # self.db_session = self.session()
+
+        def get_dict_from_entity(self, entity):
+                return dict((col, getattr(entity, col)) for col in entity.__table__.columns.keys())
+
+        def get_str_from_entity(self, entity):
+                return json.dumps(q.get_dict_from_entity(entity))
+
+
+# https://stackoverflow.com/questions/5022066/how-to-serialize-sqlalchemy-result-to-json
+class AlchemyEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj.__class__, DeclarativeMeta):
+                # an SQLAlchemy class
+                fields = {}
+                for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
+                    data = obj.__getattribute__(field)
+                    try:
+                        json.dumps(data) # this will fail on non-encodable values, like other classes
+                        fields[field] = data
+                    except TypeError:
+                        fields[field] = None
+                # a json-encodable dict
+                return fields
+
+            return json.JSONEncoder.default(self, obj)
 
 
 if __name__ == "__main__":
         print('god')
         q = PollDao()
-        q.create_poll(42)
+        team = q.create_team('Polar bears2','LLNHC')
+        print team
+        print json.dumps(q.get_dict_from_entity(team))
+        user = q.create_user('ludo', team)
+        q.create_poll(user)
+        q.find_last_poll(False,False)
         print('ok')

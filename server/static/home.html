@@ -1,0 +1,177 @@
+<html xmlns:th="http://www.thymeleaf.org" ng-app="PolarApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/jpg" href="favicon.jpg" />
+
+
+    <!--BOOTBOX-->
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+
+    <!--&lt;!&ndash;JQUERY&ndash;&gt;-->
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+
+         <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--FONTS-->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--BOOTSTRAP-->
+    <script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--<link href="css/pingendo-bootstrap.css" rel="stylesheet" type="text/css"/>-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+    <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <!--<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"/>-->
+</head>
+
+<body ng-controller="SimpleController">
+
+    <!--Header-->
+    <div class="section section-primary" style="background-color: #262161">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3 class="text-center" style="color: white">Attention vote, vote !  </h3>
+              <img class="img-fluid text-center" style="max-width: 50%; display: block; margin-left: auto; margin-right: auto" src = "logo2.jpg"/>
+          <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Descr-->
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+              <br/>
+              <h3 style="text-align:center; color:gray">Cet app vous permettra de créer facilement un vote d'équipe !</h3>
+              <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Form-->
+    <div class="section">
+
+        <div class="container">
+              <!-- FORM -->
+            <form role="form" action="#" th:action="@{/}" th:object="${formHome}" method="post">
+
+                <!--error-->
+                <div class="row">
+                    <!--Errors-->
+                    <div style="text-align: center" class="col-xs-10 col-xs-offset-1">
+                        <div th:if="${#fields.hasErrors('action')}" class="alert alert-warning alert-dismissable fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <td  th:if="${#fields.hasErrors('action')}" th:errors="*{action}">Name Error</td>
+                            <!--IGNORED style="color:red; text-align:center"-->
+                            <!--<td style="color:red; text-align:center" th:if="${#fields.hasGlobalErrors()}" th:errors="*{action}">Name Error</td>-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--new poll-->
+                <div class="form-group" th:if="${isAdmin}">
+                    <br/>
+                    <h5 style="text-align:center; color:gray; text-align: center">Veux-tu être l'admin de ce vote ? Sinon reload la page. </h5>
+                    <br/>
+
+                    <div class="row">
+
+                         <label class="col-xs-2 control-label" for="selectAdmin">Je gère</label>
+
+                        <div class="col-xs-6">
+                          <select id="selectAdmin" name="selectbasic"  class="form-control">
+                            <option ng-repeat="user in users"
+                                    value="{{user.id}}"> {{user.name}}
+                            </option>
+                          </select>
+                        </div>
+
+                         <div class="col-xs-2">
+                             <button class="btn btn-primary" id="singlebutton" name="action" type="submit" th:value="${formHome.ACTION_CREATE}" >New</button>
+                         </div>
+                    </div>
+                </div>
+
+
+                <!--join poll-->
+                <div class="form-group" th:if="${not isAdmin}">
+                    <br/>
+                    <h5 style="text-align:center; color:gray; font-weight: bold; text-align: center" th:text="${adminName} +' gère ce vote'"></h5>
+                    <h5 style="text-align:center; color:gray; text-align: center">GO pour voter, ou continuer la gestion du vote</h5>
+                    <br/>
+
+                    <div class="row">
+
+                        <label class="col-xs-2 control-label" for="selectVoter">Ton nom</label>
+
+                        <div class="col-xs-6">
+                            <select id="selectVoter" name="selectbasic" th:field="*{voter}" class="form-control">
+                            <!--<select th:field="*{admin}" id="selectbasic" name="selectbasic" class="form-control">-->
+                            <option th:each="user : ${userList}"
+                                    th:value="${user.id}"
+                                    th:text="${user.name}">
+                            </option>
+                          </select>
+                        </div>
+
+                        <div class="col-xs-2">
+                          <button class="btn btn-primary" id="singlebutton" name="action" type="submit"  th:value="${formHome.ACTION_VOTE}">GO</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="text-align: center">
+                    <a class="btn btn-info" href="/history">Replay last vote</a>
+                    <a class="btn btn-info" href="/downloadZip">Download last drawings</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+  
+
+</body>
+<!--I. ANGULAR (not defined ? should be above)-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<!--angular depencies for angular material-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+
+<!--IF FROM RAW GITHUB : https://stackoverflow.com/questions/12090883/using-type-text-plain-for-javascript-->
+<!--https://raw.githubusercontent.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-1.3.3.min.js-->
+<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+
+<!--https://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider-->
+<!--https://stackoverflow.com/questions/19197182/error-injectorunpr-unknown-provider-routeprovider-->
+<!--https://stackoverflow.com/questions/33061114/cant-find-angular-route-js-on-google-cdn-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
+<!-- ANGULAR APP -->
+<!--Note that files defining a module (i.e. .module.js) need to be included before other files that add features (e.g. components, controllers, services, filters) to that module.-->
+<script src="app/app.module.js"></script>
+<script src="app/app.controller.js"></script>
+<script src="app/app.service.js"></script>
+
+
+</html>

@@ -1,0 +1,322 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/jpg" href="favicon.jpg" />
+
+    <!--SLICK-->
+      <!--<link rel="stylesheet" type="text/css" href="css/slick.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>-->
+    <!--<script type="text/javascript" src="js/slick.min.js"></script>-->
+
+
+
+
+
+    <!--JQUERY-->
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>-->
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>$( document ).on( "mobileinit", function() {
+        $.mobile.loading().hide();
+    });
+    </script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+    <!--<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/V3jquery.min.js"></script>-->
+    <!--<script src="js/jquery.mobile.custom.min.js"></script>-->
+
+
+    <!--FONTS-->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--BOOTSTRAP-->
+    <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <!--<link href="css/pingendo-bootstrap.css" rel="stylesheet" type="text/css"/>-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"  crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"  crossorigin="anonymous"/>
+
+    <!--BOOTBOX, after JQUERY ..-->
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+
+    <!--<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+    <!--&lt;!&ndash;<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>&ndash;&gt;-->
+    <!--<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"/>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <!--<script type="text/javascript" src="js/bootbox.min.js"></script>-->
+
+
+</head>
+
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">The drawing !</h4>
+            </div>
+            <div class="modal-body">
+                <img id="imgModal" src=""/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--th:if="${isAdmin}"-->
+<!--title-->
+<!--Header-->
+<div class="section section-primary" style="background-color: #262161">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="text-center" style="color: white">Attention vote, vote !  </h3>
+                <img class="img-fluid text-center" style="max-width: 50%; display: block; margin-left: auto; margin-right: auto" src = "logo2.jpg"/>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <br/>
+
+        <!--Navigation results-->
+        <div class="row">
+            <div class="col-xs-9">
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#flops">1. FLOP/TOP</a></li>
+                    <!--<li><a data-toggle="tab" href="#tops">TOP</a></li>-->
+                    <li><a id="podium_tab" data-toggle="pill" href="#podium" style="display:none;" >2. PODIUM</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-3">
+                <form id="archivePoll" role="form" action="#" th:action="@{/archive_poll}"  method="post">
+                    <button class="btn btn-danger" type="submit" id="singlebutton" name="action">
+                        <!--<span class="glyphicon glyphicon-off" aria-hidden="true"></span>-->
+                        OFF
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!--Navigation results-->
+        <!--http://www.w3schools.com/bootstrap/bootstrap_carousel.asp-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="tab-content">
+                    <!--FLOPS-->
+                    <div id="flops" class="tab-pane fade in active">
+                        <div id="fullcarousel-example2" data-interval="false" class="carousel slide" data-ride="carousel" style="transition-duration: 3s">
+
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                    <img src="flop.jpg" />
+                                    <div class="carousel-caption">
+                                        <h2 th:text="${'FLOPS for '+readerFlop.Name}"></h2>
+                                        <h4>You will read the flops. Speak loud, and please swipe to load next guy !</h4>
+                                    </div>
+                                </div>
+
+                                <tr th:each="vote : ${votes}">
+                                    <div class="item">
+                                        <img src="flop.jpg" />
+
+
+
+                                        <div class="carousel-caption">
+                                            <h2 th:text="${vote.targetFlop.Name}"></h2>
+                                            <h4 th:text="${vote.reasonFlop}"></h4>
+                                            <!-- Trigger the modal with a button -->
+                                            <button th:if="${not #strings.isEmpty(vote.flopDrawing)}" id="myClick" type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-id=${vote.flopDrawing}" data-target="#myModal">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </tr>
+
+                                <div class="item">
+                                    <img src="top.jpg" />
+                                    <div class="carousel-caption">
+                                        <h2 th:text="${'TOPS for '+readerTop.Name}"></h2>
+                                        <h4>You will read now the tops. Speak loud, and swipe to load next guy !</h4>
+                                    </div>
+                                </div>
+
+                                <tr th:each="vote : ${votes}">
+                                    <div class="item">
+                                        <img src="top.jpg" />
+                                        <div class="carousel-caption">
+                                            <h2 th:text="${vote.targetTop.Name}"></h2>
+                                            <h4 th:text="${vote.reasonTop}"></h4>
+                                            <button th:if="${not #strings.isEmpty(vote.topDrawing)}" id="myClick" type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-id=${vote.topDrawing}" data-target="#myModal">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </tr>
+
+                                <div id="end" class="item">
+                                    <img src="top.jpg" />
+                                    <div class="carousel-caption">
+                                        <h2>PODIUM UNLOCKED !</h2>
+                                        <h4>Now you can click on the PODIUM button to read results !</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<a class="left carousel-control" href="#fullcarousel-example2" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>-->
+                            <a class="right carousel-control" href="#fullcarousel-example2" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!--TOPS-->
+                    <div id="tops" class="tab-pane fade">
+                        <div id="fullcarousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
+
+                            <div class="carousel-inner swipeable">
+                                <div class="item active">
+                                    <img src="top.jpg" />
+                                    <div class="carousel-caption">
+                                        <h1>Total</h1>
+                                        <h2 th:text="${readerTop.Name}"></h2>
+                                        <p>You will read now the tops. Speak loud, and swipe to load next guy !</p>
+                                    </div>
+                                </div>
+
+                                <tr th:each="vote : ${votes}">
+                                    <div class="item">
+                                        <img src="top.jpg" />
+                                        <div class="carousel-caption">
+                                            <h1>Total</h1>
+                                            <h2 th:text="${vote.targetTop.Name}"></h2>
+                                            <p th:text="${vote.reasonTop}"></p>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </div>
+
+
+
+                            <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
+                            <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!--PODIUM-->
+                    <div id="podium" class="tab-pane fade">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>#flop</th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="member : ${flopCount.keySet()}">
+                                        <td>1</td>
+                                        <td th:text="${flopCount.get(member)}"></td>
+                                        <td th:text="${member.name}"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>#top</th>
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="member : ${topCount.keySet()}">
+                                        <td>1</td>
+                                        <td th:text="${topCount.get(member)}"></td>
+                                        <td th:text="${member.name}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).on("click", "#myClick", function () {
+        var myBookId = $(this).data('id');
+//        alert('data='+myBookId);
+        $("#imgModal").attr('src', myBookId);
+    });
+</script>
+<script>
+    $('form').submit(function(e) {
+        //              alert('coucou');
+        var currentForm = this;
+        e.preventDefault(); // cancel default behavior
+        bootbox.confirm("Are you sure you want to archive this poll, and allow a new one to be created ?", function(result) {
+            console.log("Alert Callback");
+            if (result) {
+                currentForm.submit();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+//        $("#fullcarousel-example2").on("swiperight",function() {
+//            $(this).carousel('prev');
+//        });
+        $("#fullcarousel-example2").swipeleft(function() {
+            $(this).carousel('next');
+        });
+        $('#fullcarousel-example2').on('slid.bs.carousel', function (e) {
+            if($('#fullcarousel-example2 .item.active').attr('id')=='end'){
+                $('#podium_tab').attr('style','display:block');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

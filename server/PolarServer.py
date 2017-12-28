@@ -1,5 +1,9 @@
-from bottle import route, run, post, get
+from bottle import route, run, post, get, static_file
+from PollDao import PollDao
+import json
+from PollDao import AlchemyEncoder
 
+pollDao = PollDao()
 
 @route('/hello')
 def hello():
@@ -20,8 +24,40 @@ def hello():
 # (I) Home
 @get('/')
 def login_home():
-        pass
+        return static_file('home.html', root='./static')
 
+
+@route('/js/:path#.+#')
+def server_static(path):
+        print 'static!', path
+        return static_file(path, root='./static/js')
+
+@route('/app/:path#.+#')
+def server_static(path):
+        print 'static!', path
+        return static_file(path, root='./static/app')
+
+@route('/css/:path#.+#')
+def server_static(path):
+        print 'static!', path
+        return static_file(path, root='./static/css')
+
+@route('/fonts/:path#.+#')
+def server_static(path):
+        print 'static!', path
+        return static_file(path, root='./static/fonts')
+
+@route('/:path#.+#')
+def server_static(path):
+        print 'static!', path
+        return static_file(path, root='./static/')
+
+## static
+
+@get('/users')
+def get_users():
+        users = pollDao.find_all_users()
+        return json.dumps(users, cls=AlchemyEncoder)
 
 @post('/')
 def login_home():

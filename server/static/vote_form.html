@@ -1,0 +1,285 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/jpg" href="favicon.jpg" />
+
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!--<link href="css/pingendo-bootstrap.css" rel="stylesheet" type="text/css"/>-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!--BOOTBOX, after JQUERY ..-->
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+
+
+
+    <!-- in a production environment, you can include the minified css. It contains the css of the board and the default controls (size, nav, colors):-->
+    <link rel="stylesheet" href="css/drawingboard.min.css"/>
+    <style data-example="1">
+        #default-board-flop {
+            width: 320px;
+            height: 400px;
+        }
+        #default-board-top {
+            width: 320px;
+            height: 400px;
+        }
+    </style>
+
+    <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>-->
+    <!--<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"/>-->
+  </head>
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">The drawing !</h4>
+            </div>
+            <div class="modal-body">
+                <div class="board" id="default-board-flop"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">The drawing !</h4>
+            </div>
+            <div class="modal-body">
+                <div class="board" id="default-board-top"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Header-->
+<div class="section section-primary" style="background-color: #262161">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="text-center" style="color: white">Attention vote, vote !  </h3>
+                <img class="img-fluid text-center" style="max-width: 50%; display: block; margin-left: auto; margin-right: auto" src = "logo2.jpg"/>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+      <div class="container">
+        <div class="row">
+
+        <!--FORM-->
+        <form id="formVote" role="form" action="#" th:action="@{/vote_form}" th:object="${formVote}" method="post">
+          <!--<form role="form" action="/thanks">-->
+            <!--<div class="col-md-12">-->
+              <!--<div class="form-group">-->
+                <!--<label class="control-label" for="exampleInputEmail1">Nom du voteur (privé)</label>-->
+                <!--<div>-->
+                  <!--<select id="selectbasic" name="selectbasic" class="form-control">-->
+                    <!--<option value="1">Ludo</option>-->
+                  <!--</select>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+            <!--Errors-->
+            <div style="text-align: center" class="col-xs-10 col-xs-offset-1">
+                <div th:if="${#fields.hasErrors('textTop')}" class="alert alert-warning alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    textTop
+                    <td  th:if="${#fields.hasErrors('textTop')}" th:errors="*{textTop}">Name Error</td>
+                </div>
+                <div th:if="${#fields.hasErrors('textFlop')}" class="alert alert-warning alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    textFlop
+                    <td  th:if="${#fields.hasErrors('textFlop')}" th:errors="*{textFlop}">Name Error</td>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+              <h3>TOP</h3>
+              <div class="form-group">
+                <label class="control-label" for="selectTop">Nom de la cible</label>
+                <select id="selectTop" name="selectbasic" class="form-control" th:field="*{targetTop}">
+                    <option th:each="user : ${userList}"
+                            th:value="${user.id}"
+                            th:text="${user.name}">
+                    </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label&quot;" for="texttop">Raison</label>
+                <div>
+                  <textarea class="form-control" id="texttop" name="texttop" th:field="*{textTop}" placeholder="raison"></textarea>
+                </div>
+              </div>
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<div class="board" id="default-board-top"></div>-->
+                <!--</div>-->
+
+                <input id="inImageTop" type="hidden" name="image_top" value="" />
+                <!-- Trigger the modal with a button -->
+                <button  id="myClick2" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal2">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+
+            </div>
+
+            <div class="col-md-6">
+              <h3>FLOP</h3>
+              <div class="form-group">
+                <label class="control-label" for="selectFlop">Nom de la cible</label>
+                <select id="selectFlop" name="selectbasic" class="form-control" th:field="*{targetFlop}">
+                    <option th:each="user : ${userList}"
+                      th:value="${user.id}"
+                      th:text="${user.name}">
+                    </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label&quot;" for="textflop">Raison</label>
+                <div>
+                  <textarea class="form-control" id="textflop" name="textflop" placeholder="raison" th:field="*{textFlop}"></textarea>
+                </div>
+              </div>
+
+                <!--<div class="form-group">-->
+                    <!--<div class="board" id="default-board-flop"></div>-->
+                <!--</div>-->
+
+                <input id="inImageFlop" type="hidden" name="image_flop" value="" />
+
+                <!-- Trigger the modal with a button -->
+                <button  id="myClick" type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+
+
+            </div>
+
+            <div class="col-md-12 text-center">
+                <!--onclick="bootbox.confirm('This is the default confirm!', function(result){ console.log('This was logged in the callback:' + result); });"-->
+              <button class="btn btn-primary alerter"  id="singlebutton" name="singlebutton"  type="submit">Soumettre</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+<!-- in a production environment, just include the minified script. It contains the board and the default controls (size, nav, colors, download): -->
+<script src="js/drawingboard.min.js"></script>
+
+<script data-example="1">
+    //create the drawingboard by passing it the #id of the wanted container
+    var defaultBoardFlop = new DrawingBoard.Board('default-board-flop',{
+        controls: [
+            'Color',
+            { Size: { type: 'dropdown' } },
+            { DrawingMode: { filler: false } },
+            'Navigation']
+    });
+//    defaultBoardFlop.reset({ background: true });
+    var defaultBoardTop = new DrawingBoard.Board('default-board-top',{
+        controls: [
+            'Color',
+            { Size: { type: 'dropdown' } },
+            { DrawingMode: { filler: false } },
+            'Navigation']
+    });
+//    defaultBoardTop.reset({ background: true });
+//    alert('cleared');
+</script>
+
+ <!--not working with classical form behavior submit, but on any other html element -->
+    <!--<script>-->
+        <!--$(document).on("click", ".alerter", function(e) {-->
+            <!--bootbox.confirm("Hello world!", function() {-->
+                <!--console.log("Alert Callback");-->
+            <!--});-->
+        <!--});-->
+    <!--</script>-->
+    <script>
+        $('form').submit( function(e) {
+            // alert('coucou');
+            var currentForm = this;
+            e.preventDefault(); // cancel default behavior
+            bootbox.confirm("Are you sure ? You will NOT be able to change your vote afterwards !", function(result) {
+                console.log("Alert Callback");
+                if (result) {
+
+                    // send drawing
+                    //get drawingboard content
+                    var imgFlop = defaultBoardFlop.getImg();
+                    var imgTop = defaultBoardTop.getImg();
+
+                    //we keep drawingboard content only if it's not the 'blank canvas'
+                    var imgInputFlop = (defaultBoardFlop.blankCanvas == imgFlop) ? '' : imgFlop;
+                    var imgInputTop = (defaultBoardTop.blankCanvas == imgTop) ? '' : imgTop;
+
+
+                    //put the drawingboard content in the form field to send it to the server
+                    $(this).find('input[name=image_flop]').val( imgInputFlop );
+                    $(this).find('input[name=image_top]').val( imgInputTop );
+
+//                    alert( $(this).find('input[name=image_flop]'));
+                    document.getElementById("inImageFlop").value = imgInputFlop;
+                    document.getElementById("inImageTop").value = imgInputTop;
+
+                    //we can also assume that everything goes well server-side
+                    //and directly clear webstorage here so that the drawing isn't shown again after form submission
+                    //but the best would be to do when the server answers that everything went well
+//                    defaultBoardFlop.clearWebStorage();
+//                    defaultBoardTop.clearWebStorage();
+
+
+
+                    currentForm.submit();
+                }
+            });
+        });
+    </script>
+</body></html>
