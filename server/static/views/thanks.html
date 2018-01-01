@@ -1,0 +1,63 @@
+<div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                   <h2 contenteditable="true">Merci pour ton vote !</h2>
+                   <br/>
+                   <button href="#" class="btn btn-info btn-lg" onclick="location.reload();">
+                       <span class="glyphicon glyphicon-refresh"></span> Refresh
+                   </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+    <div class="row" th:unless="${#lists.isEmpty(votes)}">
+        <div class="col-xs-6 col-xs-offset-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Voters</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="vote : ${votes}">
+                        <td th:if="${vote.submitted!=null and !vote.submitted}" th:text="${vote.privateAuthor.name+' is still voting ...'}">a voté</td>
+                    </tr>
+                    <tr th:each="vote : ${votes}">
+                        <td th:if="${vote.submitted!=null and vote.submitted}" th:text="${vote.privateAuthor.name+' has voted'}">a voté</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form th:if="${isAdmin}" id="closePoll" role="form" action="#" th:action="@{/close_poll}"  method="post">
+            <div class="col-md-12 text-center" >
+                <br/>
+                <button href="#" type="submit" class="btn btn-primary btn-lg" >
+                    <span class="glyphicon glyphicon-off"></span> Close poll
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+    </div>
+    <script>
+        $('form').submit(function(e) {
+            // alert('coucou');
+            var currentForm = this;
+            e.preventDefault(); // cancel default behavior
+            bootbox.confirm("Are you sure you want to close ? People won't be able to vote anymore", function(result) {
+                console.log("Alert Callback");
+                if (result) {
+                    currentForm.submit();
+                }
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,94 @@
+<div>
+
+    <!--Descr-->
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+              <br/>
+              <h3 style="text-align:center; color:gray">Cet appli vous permettra de créer facilement un vote d'équipe !</h3>
+              <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Form-->
+    <div class="section">
+        <div class="container">
+              <!-- FORM -->
+            <form name="loginForm">
+                <!--error-->
+                <div class="row">
+                    <!--Errors-->
+                    <div style="text-align: center" class="col-xs-10 col-xs-offset-1">
+                        <div th:if="${#fields.hasErrors('action')}" class="alert alert-warning alert-dismissable fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <td  th:if="${#fields.hasErrors('action')}" th:errors="*{action}">Name Error</td>
+                            <!--IGNORED style="color:red; text-align:center"-->
+                            <!--<td style="color:red; text-align:center" th:if="${#fields.hasGlobalErrors()}" th:errors="*{action}">Name Error</td>-->
+                        </div>
+                    </div>
+                </div>
+
+                <!--new poll-->
+                <div class="form-group" ng-show="adminName == null">
+                    <br/>
+                    <h5 style="text-align:center; color:gray; text-align: center">Veux-tu être l'admin de ce vote ? Sinon reload la page. </h5>
+                    <br/>
+
+                    <div class="row">
+
+                         <label class="col-xs-2 control-label" for="selectAdmin">Je gère</label>
+
+                        <div class="col-xs-6">
+                          <select id="selectAdmin" name="selectbasic"  class="form-control" ng-model="loginModel.idAdmin">
+                            <option ng-repeat="user in users"
+                                    value="{{user.id}}"> {{user.name}}
+                            </option>
+                          </select>
+                        </div>
+
+                         <div class="col-xs-2">
+                             <button class="btn btn-primary"  ng-click="adminMakePoll()" >New</button>
+                         </div>
+                    </div>
+                </div>
+
+                <!--join poll-->
+                <div class="form-group" ng-show="adminName != null">
+                    <br/>
+                    <h5 style="text-align:center; color:gray; font-weight: bold; text-align: center">{{adminName +' gère ce vote'}}</h5>
+                    <h5 style="text-align:center; color:gray; text-align: center">GO pour voter, ou continuer la gestion du vote</h5>
+                    <br/>
+
+                    <div class="row">
+
+                        <label class="col-xs-2 control-label" for="selectVoter">Ton nom</label>
+
+                        <div class="col-xs-6">
+                            <select id="selectVoter" name="selectbasic" ng-model="loginModel.idUser" class="form-control">
+                                 <option ng-repeat="user in users"
+                                    value="{{user.id}}"> {{user.name}}
+                            </option>
+                          </select>
+                        </div>
+
+                        <div class="col-xs-2">
+                          <button class="btn btn-primary"  ng-click="login()">GO</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="text-align: center">
+                    <a class="btn btn-info" href="/history">Replay last vote</a>
+                    <a class="btn btn-info" href="/downloadZip">Download last drawings</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+  
+
+</div>

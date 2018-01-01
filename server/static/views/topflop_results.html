@@ -1,67 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="icon" type="image/jpg" href="favicon.jpg" />
-
-    <!--SLICK-->
-      <!--<link rel="stylesheet" type="text/css" href="css/slick.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>-->
-    <!--<script type="text/javascript" src="js/slick.min.js"></script>-->
-
-
-
-
-
-    <!--JQUERY-->
-    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>-->
-
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script>$( document ).on( "mobileinit", function() {
-        $.mobile.loading().hide();
-    });
-    </script>
-    <script src="js/jquery.mobile-1.4.5.min.js"></script>
-
-    <!--<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="js/V3jquery.min.js"></script>-->
-    <!--<script src="js/jquery.mobile.custom.min.js"></script>-->
-
-
-    <!--FONTS-->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
-    <!--BOOTSTRAP-->
-    <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <!--<link href="css/pingendo-bootstrap.css" rel="stylesheet" type="text/css"/>-->
-
-    <link rel="stylesheet" href="css/bootstrap.min.css"  crossorigin="anonymous"/>
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css"  crossorigin="anonymous"/>
-
-    <!--BOOTBOX, after JQUERY ..-->
-    <script type="text/javascript" src="js/bootbox.min.js"></script>
-
-    <!--<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-    <!--&lt;!&ndash;<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>&ndash;&gt;-->
-    <!--<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>-->
-    <!--<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"/>-->
-
-    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
-
-    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
-
-    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-    <!--<script type="text/javascript" src="js/bootbox.min.js"></script>-->
-
-
-</head>
-
-<body>
+<div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -81,21 +18,6 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-<!--th:if="${isAdmin}"-->
-<!--title-->
-<!--Header-->
-<div class="section section-primary" style="background-color: #262161">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h3 class="text-center" style="color: white">Attention vote, vote !  </h3>
-                <img class="img-fluid text-center" style="max-width: 50%; display: block; margin-left: auto; margin-right: auto" src = "logo2.jpg"/>
-                <br/>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -136,7 +58,7 @@
                             <div class="carousel-inner">
 
                                 <div class="item active">
-                                    <img src="flop.jpg" />
+                                    <img src="../images/flop.jpg" />
                                     <div class="carousel-caption">
                                         <h2 th:text="${'FLOPS for '+readerFlop.Name}"></h2>
                                         <h4>You will read the flops. Speak loud, and please swipe to load next guy !</h4>
@@ -145,7 +67,7 @@
 
                                 <tr th:each="vote : ${votes}">
                                     <div class="item">
-                                        <img src="flop.jpg" />
+                                        <img src="../images/flop.jpg" />
 
 
 
@@ -162,7 +84,7 @@
                                 </tr>
 
                                 <div class="item">
-                                    <img src="top.jpg" />
+                                    <img src="../images/top.jpg" />
                                     <div class="carousel-caption">
                                         <h2 th:text="${'TOPS for '+readerTop.Name}"></h2>
                                         <h4>You will read now the tops. Speak loud, and swipe to load next guy !</h4>
@@ -171,7 +93,7 @@
 
                                 <tr th:each="vote : ${votes}">
                                     <div class="item">
-                                        <img src="top.jpg" />
+                                        <img src="../images/top.jpg" />
                                         <div class="carousel-caption">
                                             <h2 th:text="${vote.targetTop.Name}"></h2>
                                             <h4 th:text="${vote.reasonTop}"></h4>
@@ -183,7 +105,7 @@
                                 </tr>
 
                                 <div id="end" class="item">
-                                    <img src="top.jpg" />
+                                    <img src="../images/top.jpg" />
                                     <div class="carousel-caption">
                                         <h2>PODIUM UNLOCKED !</h2>
                                         <h4>Now you can click on the PODIUM button to read results !</h4>
@@ -202,7 +124,7 @@
 
                             <div class="carousel-inner swipeable">
                                 <div class="item active">
-                                    <img src="top.jpg" />
+                                    <img src="../images/top.jpg" />
                                     <div class="carousel-caption">
                                         <h1>Total</h1>
                                         <h2 th:text="${readerTop.Name}"></h2>
@@ -212,7 +134,7 @@
 
                                 <tr th:each="vote : ${votes}">
                                     <div class="item">
-                                        <img src="top.jpg" />
+                                        <img src="../images/top.jpg" />
                                         <div class="carousel-caption">
                                             <h1>Total</h1>
                                             <h2 th:text="${vote.targetTop.Name}"></h2>
@@ -318,5 +240,4 @@
     });
 </script>
 
-</body>
-</html>
+</div>

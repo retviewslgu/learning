@@ -15,17 +15,17 @@ angular.module('DemoApp').config(['$locationProvider', '$routeProvider',
                 $routeProvider
                         .when('/',
                             {
-                                controller: 'SimpleController',
+                                controller: 'LoginController',
                                 templateUrl: 'partials/home.html'
                             })
                         .when('/view1',
                             {
-                                controller: 'SimpleController',
+                                controller: 'LoginController',
                                 templateUrl: 'partials/View1.html'
                             })
                         .when('/view2',
                             {
-                                controller: 'SimpleController',
+                                controller: 'LoginController',
                                 templateUrl: 'partials/View2.html'
                             })
                         .when('/official',
