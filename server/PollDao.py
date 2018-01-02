@@ -74,51 +74,51 @@ class PollDao:
 
         # 0. Team & Users
         def create_team(self, name, club):
-                db_session = self.session()
+                db_session = self.session
                 team = Team(name=name, club=club)
                 db_session.add(team)
                 db_session.commit()
                 return team
 
         def create_user(self, name, team):
-                db_session = self.session()
+                db_session = self.session
                 user = User(name=name, team_id=team.id)
                 db_session.add(user)
                 db_session.commit()
                 return user
 
         def find_all_users(self):
-                db_session = self.session()
+                db_session = self.session
                 return db_session.query(User).all()
 
         # I. Polls
         def create_poll(self, admin_id):
-                db_session = self.session()
+                db_session = self.session
                 poll = Poll(admin_id=admin_id, creation_date=datetime.now())
                 db_session.add(poll)
                 db_session.commit()
                 return poll
 
         def close_poll(self, id_poll):
-                poll = self.find_last_poll(0,0)
+                poll = self.find_last_poll(0, 0)
                 if poll is not None:
-                        db_session = self.session()
+                        db_session = self.session
                         poll.closed = 1
                         db_session.add(poll)
                         db_session.commit()
                 return poll
 
         def archive_poll(self, id_poll):
-                poll = self.find_last_poll(1,0)
+                poll = self.find_last_poll(1, 0)
                 if poll is not None:
-                        db_session = self.session()
+                        db_session = self.session
                         poll.archived = 1
                         db_session.add(poll)
                         db_session.commit()
                 return poll
 
         def find_last_poll(self, closed, archived):
-                db_session = self.session()
+                db_session = self.session
                 # | Poll.closed ==  int(closed == True)
                 row = db_session.query(Poll) \
                         .filter((Poll.archived == int(archived)), (Poll.closed == int(closed))) \
@@ -131,19 +131,19 @@ class PollDao:
                 pass
 
         def find_all_polls(self):
-                db_session = self.session()
+                db_session = self.session
                 return db_session.query(Poll).all()
 
         # II. Votes
         def find_last_vote(self, user_id, poll_id=None, has_voted=0):
-                db_session = self.session()
+                db_session = self.session
                 return db_session.query(Vote) \
-                        .filter((Vote.author_id == user_id),(Vote.poll_id == poll_id), (Vote.has_voted == 0)) \
+                        .filter((Vote.author_id == user_id), (Vote.poll_id == poll_id), (Vote.has_voted == 0)) \
                         .order_by(desc(Vote.creation_date)) \
                         .first()
 
         def create_vote(self, user_id, poll_id):
-                db_session = self.session()
+                db_session = self.session
                 vote = Vote(author_id=user_id, poll_id=poll_id)
                 vote.has_voted = 0
                 db_session.add(vote)
@@ -154,9 +154,9 @@ class PollDao:
                 return vote
 
         def close_vote(self, user_id, poll_id, json_data):
-                vote = self.find_last_vote(user_id,poll_id, 0)
+                vote = self.find_last_vote(user_id, poll_id, 0)
                 if vote is not None:
-                        db_session = self.session()
+                        db_session = self.session
                         vote.id_flop = int(json_data['id_flop'])
                         vote.text_flop = json_data['text_flop']
                         vote.drawing_flop = json_data['drawing_flop']
@@ -168,7 +168,6 @@ class PollDao:
                         # db_session.flush()
                         # db_session.close()
                 return vote
-
 
         # UTILITIES
 
@@ -205,20 +204,17 @@ class PollDao:
                           'database': 'polarbee'
                           }
                 self.engine = create_engine(URL(**db_url))
-                self.session = sessionmaker()
-                self.the_session = self.session()
-                self.session.configure(bind=self.engine)
+                self.session_maker = sessionmaker()
+                self.session_maker.configure(bind=self.engine)
+                self.session = self.session_maker()
                 # self.engine.connect().execute() # SQL
-                # self.db_session = self.session()
+                # self.db_session = self.session
 
         def get_dict_from_entity(self, entity):
                 return dict((col, getattr(entity, col)) for col in entity.__table__.columns.keys())
 
         def get_str_from_entity(self, entity):
                 return json.dumps(q.get_dict_from_entity(entity))
-
-
-
 
 
 if __name__ == "__main__":
@@ -235,7 +231,7 @@ if __name__ == "__main__":
         print poll
 
         vote1 = q.create_vote(user.id, poll.id)
-        print 'vote1=',vote1
+        print 'vote1=', vote1
 
         vote1.text_flop = 'tu sors'
         vote1.id_flop = 1
@@ -245,13 +241,11 @@ if __name__ == "__main__":
         vote1.drawing_top = 'text_data2'
         print 'vote1=', vote1
 
-
-
         last = q.find_last_poll(False, False)
         # print json.dumps(last, cls=AlchemyEncoder)
-        print 'last=',last
+        print 'last=', last
 
-        vote1saved = q.close_vote(user.id,poll.id,json.loads(vote1.__repr__()))
+        vote1saved = q.close_vote(user.id, poll.id, json.loads(vote1.__repr__()))
         print 'vote1saved', vote1saved
         # session issue
         # https://docs.python.org/2/library/json.html

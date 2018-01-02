@@ -79,7 +79,7 @@ def server_static(path):
 @get('/users')
 def get_users():
         users = pollDao.find_all_users()
-        return Models.get_str_from_entity(users)
+        return Models.get_json_from_entity(users)
 
 
 @post('/make_poll')
@@ -88,7 +88,7 @@ def make_poll():
         print 'make_poll', id_admin
         poll = pollDao.create_poll(id_admin)
         vote = pollDao.create_vote(id_admin,poll.id)
-        return Models.get_str_from_entity(poll)
+        return Models.get_json_from_entity(poll)
 
 @post('/login')
 def login():
@@ -100,7 +100,7 @@ def login():
 def last_poll(closed, archived):
         print 'last_poll', closed, archived
         poll = pollDao.find_last_poll(closed == '1', archived == '1')
-        res = Models.get_str_from_entity(poll)
+        res = Models.get_json_from_entity(poll)
         print res
         return res
 
@@ -110,14 +110,14 @@ def last_poll(closed, archived):
 def vote_form():
         id_user = request.json['id_user']
         vote = pollDao.find_last_vote(id_user)
-        return Models.get_str_from_entity(vote)
+        return Models.get_json_from_entity(vote)
 
 
 @post('/vote_form')
 def vote_form():
         id_user = request.json['id_user']
         id_poll = request.json['id_poll']
-        vote_data = request.json['vote'] 
+        vote_data = request.json['vote']
         pollDao.close_vote(id_user, id_poll, vote_data)
 
 

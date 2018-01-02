@@ -42,7 +42,7 @@ class Team(Base):
         club = Column(String)
 
         def __repr__(self):
-                return get_str_from_entity(self)
+                return get_json_from_entity(self)
 
 
 class User(Base):
@@ -53,7 +53,7 @@ class User(Base):
         is_captain = Column(Integer, default=0)
 
         def __repr__(self):
-                return get_str_from_entity(self)
+                return get_json_from_entity(self)
 
 
 class Poll(Base):
@@ -63,11 +63,12 @@ class Poll(Base):
         closed = Column(Integer, default=0)
         admin_id = Column(Integer, ForeignKey('user.id'))
         creation_date = Column(DateTime, default=datetime.utcnow)
-        votes = relationship("Vote", backref="poll")
+        # http://docs.sqlalchemy.org/en/latest/orm/basic_relationships.html
+        votes = relationship("Vote")    #  backref="poll", do not add a Poll entity with the full fields
 
         # TODO all votes
         def __repr__(self):
-                return get_str_from_entity(self)
+                return get_json_from_entity(self)
 
 
 class Vote(Base):
@@ -89,18 +90,18 @@ class Vote(Base):
         has_voted = Column(Integer, default=0)
 
         def __repr__(self):
-                return get_str_from_entity(self)
+                return get_json_from_entity(self)
 
 
 def get_dict_from_entity(entity):
         return dict((col, getattr(entity, col)) for col in entity.__table__.columns.keys())
 
 
-def get_str_from_entity_base(entity):
+def get_json_from_entity_base(entity):
         return json.dumps(get_dict_from_entity(entity))
 
 
-def get_str_from_entity(entity):
+def get_json_from_entity(entity):
         return json.dumps(entity, cls=new_alchemy_encoder(), check_circular=False)  # cls=AlchemyEncoder)
 
 
